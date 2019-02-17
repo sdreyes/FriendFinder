@@ -142,11 +142,25 @@
                             <option>5</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-info">Submit</button>
+                    <button type="submit" class="btn btn-lg btn-info" id="survey-submit">Submit</button>
                 </form>
             </div>
         </div>
     </div>
     <br />
+
+    <script type="text/javascript">
+        $("#survey-submit").on("click", function(event) {
+            event.preventDefault();
+
+            var name = $("#name-input").val().trim();
+            var photo = $("#photo-input").val().trim();
+            var scores = [];
+            for (i=0; i < 10; i++) {
+                scores.push($("#" + (i+1)).val().trim());
+            };
+            console.log(scores);
+        })
+    </script>
 </body>
 </html>
