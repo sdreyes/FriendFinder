@@ -149,7 +149,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="assignedFriendLabel">Match Found!</h5>
+                                    <h5 class="modal-title" id="assignedFriendLabel"></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 </div> 
                                 <div class="modal-body text-center" id="assignedFriendInfo">
@@ -179,11 +179,18 @@
                 photo: $("#photo-input").val().trim(),
                 scores: scores
             };
-
-            $.post("./api/friends", newFriend, function(data) {
-                $("#assignedFriendInfo").html("<img class='img-fluid' src='" + data.photo + "'><h3>" + data.name + "</h3>");
-            })
-        })
+            
+            if (newFriend.name === "" || newFriend.photo === "") {
+                $("#assignedFriendLabel").text("Error")
+                $("#assignedFriendInfo").text("You must enter in your name and photo.");
+            }
+            else {
+                $.post("./api/friends", newFriend, function(data) {
+                    $("#assignedFriendLabel").text("Match found!")
+                    $("#assignedFriendInfo").html("<img class='img-fluid' src='" + data.photo + "'><h3>" + data.name + "</h3>");
+                });
+            };
+        });
     </script>
 </body>
 </html>
