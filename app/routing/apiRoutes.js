@@ -5,8 +5,8 @@ module.exports = function(app) {
         res.json(friends);
     });
 
-    app.post("/api/tables", function(req, res) {
-        if (req.body.name && req.body.scores === 10) {
+    app.post("/api/friends", function(req, res) {
+        if (req.body.name && req.body.scores === 10 && req.body.photo) {
             friends.push(req.body);
             res.json(true);
         }

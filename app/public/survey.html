@@ -160,7 +160,19 @@
                 scores.push($("#" + (i+1)).val().trim());
             };
             console.log(scores);
+
+            $.post("/api/friends", function(data) {
+                if (data) {
+                    alert("Your friend info is recorded,");
+                }
+                else {
+                    alert("You need to fill out all fields.");
+                }
+            })
         })
+        
+
+
     </script>
 </body>
 </html>
