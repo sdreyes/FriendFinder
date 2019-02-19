@@ -7,12 +7,26 @@ module.exports = function(app) {
 
     app.post("/api/friends", function(req, res) {
         console.log(req.body);
-        if (req.body.name && req.body.scores.length === 10 && req.body.photo) {
-            friends.push(req.body);
-            res.json(true);
+        friendDifferences = [];
+        friendCompatibilities = [];
+        function difference(friendScore, userScores) {
+            return Math.abs(friendScore-userScore);
+        };
+        function addArr(accumulator, a) {
+            return accumulator + a;
         }
-        else {
-            res.json(false);
-        }
+
+        for (i=0; i < friends.length; i++) {
+            for (j=0; j < 10; j++) {
+                var friendScore = parseInt(friends[i].scores[j]);
+                var userScore = parseInt(req.body.scores[j]);
+                friendDifferences.push(difference(friendScore, userScore));
+            };
+            friendCompatibilities.push(friendDifferences.reduce(addArr));
+        };
+        var bestScore = Math.min.apply(null, friendCompatibilities);
+        var bestFriendIndex = friendCompatibilities.indexOf(bestScore);
+        var bestFriend = friends[bestFriendIndex];
+        friends.push(req.body);
     });
 };

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Friend Finder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery -->
     <script
@@ -13,6 +13,8 @@
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous">
     </script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -142,7 +144,22 @@
                             <option>5</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-info" id="survey-submit">Submit</button>
+                    <button type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#assignedFriend" id="survey-submit">Submit</button>
+                    <div class="modal fade" id="assignedFriend" tabindex="-1" role="dialog" aria-labelledby="assignedFriendLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="assignedFriendLabel">Match Found!</h5>
+                                </div> 
+                                <div class="modal-body" id="assignedFriendPhoto">
+                                    <!-- Friend info goes here -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -151,34 +168,21 @@
 
     <script type="text/javascript">
         $("#survey-submit").on("click", function(event) {
-            event.preventDefault();
-
-            var name = $("#name-input").val().trim();
-            var photo = $("#photo-input").val().trim();
             var scores = [];
             for (i=0; i < 10; i++) {
                 scores.push($("#" + (i+1)).val().trim());
             };
             console.log(scores);
             var newFriend = {
-                name: name,
-                photo: photo,
+                name: $("#name-input").val().trim(),
+                photo: $("#photo-input").val().trim(),
                 scores: scores
             };
 
-            $.post("/api/friends", newFriend, function(data) {
-                console.log(data);
-                if (data) {
-                    alert("Your friend info is recorded,");
-                }
-                else {
-                    alert("You need to fill out all fields.");
-                }
+            $.post("./api/friends", newFriend, function(data) {
+
             })
         })
-        
-
-
     </script>
 </body>
 </html>
