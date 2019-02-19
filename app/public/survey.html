@@ -162,6 +162,7 @@
             console.log(scores);
 
             $.post("/api/friends", function(data) {
+                console.log(data);
                 if (data) {
                     alert("Your friend info is recorded,");
                 }
