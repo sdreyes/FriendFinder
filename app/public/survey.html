@@ -160,8 +160,13 @@
                 scores.push($("#" + (i+1)).val().trim());
             };
             console.log(scores);
+            var newFriend = {
+                name: name,
+                photo: photo,
+                scores: scores
+            };
 
-            $.post("/api/friends", function(data) {
+            $.post("/api/friends", newFriend, function(data) {
                 console.log(data);
                 if (data) {
                     alert("Your friend info is recorded,");

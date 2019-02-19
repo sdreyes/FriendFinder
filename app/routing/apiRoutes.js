@@ -6,6 +6,7 @@ module.exports = function(app) {
     });
 
     app.post("/api/friends", function(req, res) {
+        console.log(req.body);
         if (req.body.name && req.body.scores.length === 10 && req.body.photo) {
             friends.push(req.body);
             res.json(true);
