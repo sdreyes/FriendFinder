@@ -13,7 +13,7 @@ The API displays the answers from everyone who's taken the survey.
 
 ![API](app/public/assets/screenshots/json.PNG)
 
-The user needs to input their name and photo link to recieve a response from the server. The server will send back information about a person whose score answers most closely matches the user's.
+The user needs to input their name and photo link to recieve a response from the server. The server will send back information about a person whose score answers most closely match the user's.
 
 ![Survey Page](app/public/assets/screenshots/survey.PNG)
 
